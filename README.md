@@ -26,6 +26,7 @@ A condição real para o encerramento da simulação é o fim do incêndio pela 
 ## Metodologia
 
 Enquanto o arquivo main.cpp inclui puramente chamadas de outras funções, a lógica do programa foi dividida entre 4 classes que implementam as funcionalidades principais do programa: 
+
 - [Grid](src/grid.hpp): Implementa a matriz onde ocorre o incêndio e as interações do animal com a mesma.
 - [Fire](src/fire.hpp): Implementa as funções que permitem que o fogo se espalhe nas direções definidas pelos limites da matriz e pelo vento.
 - [Setup](src/setup.hpp): Realiza a leitura do arquivo de [Input](input.dat) e prepara a matriz que será utilizada como Grid
@@ -44,19 +45,24 @@ Estas classes possuem uma série de funções que serão abordadas individualmen
 
 ### [Fire](src/fire.cpp)
 -  **_addInitialFire()_**: Adiciona o fogo inicial salvo na estrutura [_Field_](https://github.com/Rutrama/Forest-Fire/blob/main/README.md#L55) ao vetor de focos de incêndio, iniciando a estrutura.
+  
 -  **_SpreadFire_**: Decide usando a função _rand()_ qual foco será espalhado nesta iteração e modifica seu terreno para cinzas (_3_) além de adicionar novos focos de incêndio ao vetor principal.
+  
 -  **_getValidFireDirections_**: Verifica a posições do fogo selecionado para propagação e certifica que as posições adjacentes sejam válidas para sua movimentação, ou seja, que ela seja condizente com a direção do vento especificada no arquivo de [configuração](src/config.hpp) e que ela não esteja nos limites da matriz.
+  
 -  **_SpreadFrom_**: Transforma árvores saudáveis (_1_) em todas as direções validas na matriz (obtidas na função anterior) em focos de incêndio (_2_) e as adiciona no vetor de  _novos_ focos de incêndio.
+  
 - **_removeBurntTree_**: Remove a árvore na posição especificada do vetor de focos de incêndio. Em especial é usada sempre que uma árvore propaga seu fogo, de forma a remover cinzas (_3_) do vetor.
-- 
 
 ### [Setup](src/setup.cpp)
 - **_struct Field_**: A estrutura básica necessária para inicializar a matriz, contendo o número de linhas, colunas e a posição inicial do fogo além da própria matriz, na forma de um vetor de vetor.
- - **_readSetup_**: Cria uma matriz vazia do tamanho especificado no arquivo de [entrada](input.dat) e salva na estrutura criada acima as informações obtidas através de sua leitura.
+  
+- **_readSetup_**: Cria uma matriz vazia do tamanho especificado no arquivo de [entrada](input.dat) e salva na estrutura criada acima as informações obtidas através de sua leitura.
 
 ### [Output](src/output.cpp)
 - **_writeIteration_**: Função que é chamada todo turno, de forma a salvar uma cópia da matriz após todas as modificações no arquivo de _output_ além de escrever a posição atual do animal.
 > Animal em (X, Y)
+
 - **_writeDeathInfo_**: Acessa a função [_getDeathIteration_](https://github.com/Rutrama/Forest-Fire/blob/main/README.md#L39) e salva o valor obtido no arquivo _output.dat_, caso seu valor seja o valor default _(-1)_, o animal sobreviveu
 > "O animal morreu na iteração T"
 ou
@@ -66,8 +72,10 @@ ou
 O Repositório foi compilado e testado utilizando 
 - _g++-14_ no MacOS Ventura 13.7.4
   > g++-14 -std=c++17 src/*.cpp -o forest_fire_simulation -Wall -Wextra
+  
 - _Apple-Clang_ no MacOS Ventura 13.7.4
   > g++ -std=c++17 src/*.cpp -o forest_fire_simulation -Wall -Wextra
+  
 - _g++-17_ no Ubuntu 22.04
   > g++-17 src/*.cpp -o forest_fire_simulation -Wall -Wextra
 

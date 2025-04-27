@@ -42,6 +42,14 @@ Estas classes possuem uma série de funções que serão abordadas individualmen
 - **_CheckAndUseWater_**: Caso o animal se localize em água _(4)_, esta função irá "usar" a água de forma a transformar todos os terrenos adjacentes (sejam eles quais forem) em árvores saudáveis _(1)_. O terreno onde a água se localiza se torna então uma área vazia _(0)_.
 - **_handleFireImpact_**: Detecta após o espalhamento do fogo se houve colisão com a posição do animal, e caso tenha ocorrido, permite uma movimentação de emergência para que o animal escape do fogo. Também emite uma mensagem no terminal para que se saiba que a movimentação dupla entre duas iterações foi causada por uma colisão com o fogo.
 
+### [Fire](src/fire.cpp)
+-  **_addInitialFire()_**: Adiciona o fogo inicial salvo na estrutura [_Field_](https://github.com/Rutrama/Forest-Fire/blob/main/README.md#L55) ao vetor de focos de incêndio, iniciando a estrutura.
+-  **_SpreadFire_**: Decide usando a função _rand()_ qual foco será espalhado nesta iteração e modifica seu terreno para cinzas (_3_) além de adicionar novos focos de incêndio ao vetor principal.
+-  **_getValidFireDirections_**: Verifica a posições do fogo selecionado para propagação e certifica que as posições adjacentes sejam válidas para sua movimentação, ou seja, que ela seja condizente com a direção do vento especificada no arquivo de [configuração](src/config.hpp) e que ela não esteja nos limites da matriz.
+-  **_SpreadFrom_**: Transforma árvores saudáveis (_1_) em todas as direções validas na matriz (obtidas na função anterior) em focos de incêndio (_2_) e as adiciona no vetor de  _novos_ focos de incêndio.
+- **_removeBurntTree_**: Remove a árvore na posição especificada do vetor de focos de incêndio. Em especial é usada sempre que uma árvore propaga seu fogo, de forma a remover cinzas (_3_) do vetor.
+- 
+
 ### [Setup](src/setup.cpp)
 - **_struct Field_**: A estrutura básica necessária para inicializar a matriz, contendo o número de linhas, colunas e a posição inicial do fogo além da própria matriz, na forma de um vetor de vetor.
  - **_readSetup_**: Cria uma matriz vazia do tamanho especificado no arquivo de [entrada](input.dat) e salva na estrutura criada acima as informações obtidas através de sua leitura.

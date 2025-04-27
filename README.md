@@ -36,11 +36,17 @@ Estas classes possuem uma série de funções que serão abordadas individualmen
 
 ### [Grid](src/grid.cpp)
 - **_getAnimalX_** and **_getAnimalY_**: Métodos de acesso da posição horizontal e vertical do Animal, respectivamente.
+  
 -  **_isAnimalDead()_**: Uma função simples que retorna o estado de vida do animal. É utilizada para retornar todas as outras funções logo após a chamada depois que há a morte do animal, para que este não continue se movimentando e interagindo com o terreno.
--  **_getDeathIteration_**: Uma função que acessa a iteração onde o animal pereceu, de forma que esta possa ser colocada no final o arquivo de _output_
+  
+-  **_getDeathIteration_**: Uma função que acessa a iteração onde o animal pereceu, de forma que esta possa ser colocada no final o arquivo de _output_.
+  
 - **_getValidDirections_**: Verifica a posições do animal e certifica que as posições adjacentes sejam válidas para sua movimentação, ou seja, que ele não esteja nos limites da matriz.
+  
 - **_moveAnimal_**: Utilizando as direções validadas da função anterior verifica qual o tipo de terreno há naquela posição e as salva no vetor safeMoves seguindo a ordem de prioridade de terrenos, de forma que ao selecionar a primeira posição, a função sempre terá acesso a primeira posição disponível da maior prioridade de terreno presente.
+  
 - **_CheckAndUseWater_**: Caso o animal se localize em água _(4)_, esta função irá "usar" a água de forma a transformar todos os terrenos adjacentes (sejam eles quais forem) em árvores saudáveis _(1)_. O terreno onde a água se localiza se torna então uma área vazia _(0)_.
+  
 - **_handleFireImpact_**: Detecta após o espalhamento do fogo se houve colisão com a posição do animal, e caso tenha ocorrido, permite uma movimentação de emergência para que o animal escape do fogo. Também emite uma mensagem no terminal para que se saiba que a movimentação dupla entre duas iterações foi causada por uma colisão com o fogo.
 
 ### [Fire](src/fire.cpp)
